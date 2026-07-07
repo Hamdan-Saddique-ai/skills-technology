@@ -1,0 +1,130 @@
+@import "tailwindcss";
+@import "@fontsource/space-grotesk/400.css";
+@import "@fontsource/space-grotesk/500.css";
+@import "@fontsource/space-grotesk/700.css";
+@import "@fontsource/inter/400.css";
+@import "@fontsource/inter/500.css";
+@import "@fontsource/inter/600.css";
+
+/* ------------------------------------------------------------------ */
+/* Design tokens — Skills Technology brand system                      */
+/* Every color/spacing decision in components should reference these  */
+/* tokens rather than hardcoding hex values.                          */
+/* ------------------------------------------------------------------ */
+@theme inline {
+  /* Brand colors */
+  --color-royal: #1e3aed;
+  --color-royal-dark: #14268f;
+  --color-sky: #4fa8ff;
+  --color-ink: #0a1a3d;
+  --color-mist: #f3f7ff;
+  --color-white: #ffffff;
+
+  /* Semantic aliases */
+  --color-brand: var(--color-royal);
+  --color-brand-soft: var(--color-sky);
+  --color-surface: var(--color-mist);
+  --color-text: var(--color-ink);
+
+  /* Fonts */
+  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  /* Radii */
+  --radius-card: 1.25rem;
+  --radius-pill: 999px;
+
+  /* Shadows / glows */
+  --shadow-glow-sm: 0 0 24px 0 rgb(79 168 255 / 0.35);
+  --shadow-glow-md: 0 8px 40px -8px rgb(30 58 237 / 0.45);
+  --shadow-glass: 0 8px 32px 0 rgb(10 26 61 / 0.12);
+}
+
+html,
+body {
+  background: var(--color-white);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  scroll-behavior: smooth;
+}
+
+h1,
+h2,
+h3,
+h4,
+.font-display {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+}
+
+/* ------------------------------------------------------------------ */
+/* Glassmorphism surface used for nav, cards, forms                    */
+/* ------------------------------------------------------------------ */
+.glass {
+  background: rgb(255 255 255 / 0.6);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  border: 1px solid rgb(255 255 255 / 0.5);
+  box-shadow: var(--shadow-glass);
+}
+
+.glow-ring {
+  box-shadow: var(--shadow-glow-sm);
+}
+
+.brand-gradient {
+  background-image: linear-gradient(
+    135deg,
+    var(--color-royal) 0%,
+    var(--color-sky) 100%
+  );
+}
+
+.brand-gradient-text {
+  background-image: linear-gradient(
+    135deg,
+    var(--color-royal) 0%,
+    var(--color-sky) 100%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+/* Weather background canvas sits behind everything, fixed to viewport */
+#weather-bg-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+}
+
+/* Marquee for testimonials */
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 40s linear infinite;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
